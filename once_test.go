@@ -8,7 +8,7 @@ import (
 )
 
 func TestResetSyncOnce(t *testing.T) {
-	once := sync.Once{}
+	once := &sync.Once{}
 
 	counter := 0
 
@@ -32,7 +32,7 @@ func TestResetSyncOnce(t *testing.T) {
 		t.Fatalf("expected %v, got %v", want, counter)
 	}
 
-	sabotage.ResetSyncOnce(&once)
+	sabotage.ResetSyncOnce(once)
 
 	counter = 0
 	work(78)
@@ -42,15 +42,15 @@ func TestResetSyncOnce(t *testing.T) {
 }
 
 func TestIsOnceDone(t *testing.T) {
-	once := sync.Once{}
+	once := &sync.Once{}
 
-	if sabotage.IsOnceDone(&once) {
+	if sabotage.IsOnceDone(once) {
 		t.Error("should be false")
 	}
 
 	once.Do(func() {})
 
-	if !sabotage.IsOnceDone(&once) {
+	if !sabotage.IsOnceDone(once) {
 		t.Error("should be true")
 	}
 }
