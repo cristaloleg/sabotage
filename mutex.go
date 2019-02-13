@@ -17,7 +17,7 @@ func IsMutexLocked(m *sync.Mutex) bool {
 	return atomic.LoadInt32(&spy.state) == 1
 }
 
-// UnlockMutex ...
+// UnlockMutex will unlock a mutex.
 func UnlockMutex(mutex *sync.Mutex) {
 	spy := (*mutexSpy)(unsafe.Pointer(mutex))
 	atomic.StoreInt32(&spy.state, 0)
