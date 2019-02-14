@@ -1,5 +1,9 @@
 # SABOTAGE
 
+[![Build Status](https://travis-ci.org/cristaloleg/sabotage.svg)](https://travis-ci.org/cristaloleg/sabotage)
+[![GoDoc](https://godoc.org/github.com/cristaloleg/sabotage?status.svg)](https://godoc.org/github.com/cristaloleg/sabotage)
+[![Go Report](https://goreportcard.com/badge/github.com/cristaloleg/sabotage)](https://goreportcard.com/report/github.com/cristaloleg/sabotage)
+
 ![logo](https://raw.githubusercontent.com/cristaloleg/sabotage/master/sabotage.jpg)
 
     Cause what you see, you might not get
