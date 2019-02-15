@@ -1,5 +1,15 @@
 # SABOTAGE
 
+[![Build Status](https://travis-ci.org/cristaloleg/sabotage.svg)](https://travis-ci.org/cristaloleg/sabotage)
+[![GoDoc](https://godoc.org/github.com/cristaloleg/sabotage?status.svg)](https://godoc.org/github.com/cristaloleg/sabotage)
+[![Go Report](https://goreportcard.com/badge/github.com/cristaloleg/sabotage)](https://goreportcard.com/report/github.com/cristaloleg/sabotage)
+
+Collection of dirty hacks in Go.
+
+1. Repeat `sync.Once` once more.
+2. Check if `sync.Mutex`/`sync.RWMutex` is locked.
+3. `[]byte <-> string` conversion without additional allocation.
+
 ![logo](https://raw.githubusercontent.com/cristaloleg/sabotage/master/sabotage.jpg)
 
     Cause what you see, you might not get
@@ -10,6 +20,8 @@
     Whhhhhyyyyyy??????
 
     (c) Beastie Boys - Sabotage
+
+## Examples
 
 1. You can repeat `sync.Once` as much as you want:
 
