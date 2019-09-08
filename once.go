@@ -7,8 +7,8 @@ import (
 )
 
 type onceSpy struct {
-	m    sync.Mutex
 	done uint32
+	m    sync.Mutex
 }
 
 // ResetSyncOnce will reset sync.Once to default state.
