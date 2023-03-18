@@ -30,13 +30,13 @@ jobs:
 
     steps:
       - name: Install Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v4
         with:
           go-version: 'stable'
           check-latest: true
 
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Go Format
         run: gofmt -s -w . && git diff --exit-code
