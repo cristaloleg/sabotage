@@ -1,30 +1,78 @@
-on: [push, pull_request]
+name: build
 
-name: Go
+permissions: read-all
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+  - cron: '0 10 * * 1' # run "At 10:00 on Monday"
+  workflow_call:
+    inputs:
+      skipTests:
+        description: 'Skip tests, useful when there is a dedicated CI job for tests'
+        default: false
+        required: false
+        type: boolean
+
 jobs:
-
-  test:
+  run:
+    name: Build
     strategy:
       matrix:
-        go-version: [1.13.4]
+        go-version: 'stable'
         platform: [ubuntu-latest, macos-latest, windows-latest]
-    runs-on: ${{ matrix.platform }}
-    steps:
-    - name: Install Go
-      uses: actions/setup-go@v1
-      with:
-        go-version: ${{ matrix.go-version }}
-    - name: Checkout code
-      uses: actions/checkout@v1
-    - name: Download Go dependencies
-      env:
-        GOPROXY: "https://proxy.golang.org"
-      run: go mod download
-    - name: Test
-      run: go test -count=1 ./...
-    - name: Test with -short -race
-      run: go test -race -count=1 ./...
 
-    - name: gofmt check
-      run: diff <(echo -n) <(gofmt -d .)
-      if: matrix.platform == 'ubuntu-latest'
+    runs-on: ${{ matrix.platform }}
+    timeout-minutes: 5
+    strategy:
+      fail-fast: true
+      matrix:
+        go: ['stable']
+
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ matrix.go }}
+          check-latest: true
+
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Go Format
+        run: gofmt -s -w . && git diff --exit-code
+
+      - name: Go Tidy
+        run: go mod tidy && git diff --exit-code
+
+      - name: Go Mod
+        run: go mod download
+
+      - name: Go Mod Verify
+        run: go mod verify
+
+      - name: Go Generate
+        run: go generate ./... && git diff --exit-code
+
+      - name: Go Build
+        run: go build -o /dev/null ./...
+
+      - name: Go Compile
+        if: ${{ inputs.skipTests }}
+        run: go test -exec /bin/true ./...
+
+      - name: Go Test
+        if: ${{ !inputs.skipTests }}
+        run: go test -v -count=1 -race -shuffle=on -coverprofile=coverage.txt ./...
+
+      - name: Upload Coverage
+        if: ${{ !inputs.skipTests }}
+        uses: codecov/codecov-action@v3
+        continue-on-error: true
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          file: ./coverage.txt
+          fail_ci_if_error: false

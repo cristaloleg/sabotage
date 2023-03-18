@@ -1,3 +1,3 @@
 module github.com/cristaloleg/sabotage
 
-go 1.13
+go 1.20
