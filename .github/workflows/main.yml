@@ -21,16 +21,14 @@ jobs:
   run:
     name: Build
     strategy:
+      fail-fast: true
       matrix:
         go-version: 'stable'
+        go: ['stable']
         platform: [ubuntu-latest, macos-latest, windows-latest]
 
     runs-on: ${{ matrix.platform }}
     timeout-minutes: 5
-    strategy:
-      fail-fast: true
-      matrix:
-        go: ['stable']
 
     steps:
       - name: Install Go
