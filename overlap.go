@@ -6,7 +6,6 @@ import "unsafe"
 // The memory beyond the slice length is ignored.
 //
 // Based on golang.org/x/crypto/internal/subtle
-//
 func HasOverlap(x, y []byte) bool {
 	return len(x) > 0 && len(y) > 0 &&
 		uintptr(unsafe.Pointer(&x[0])) <= uintptr(unsafe.Pointer(&y[len(y)-1])) &&
