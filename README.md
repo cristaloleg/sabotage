@@ -1,8 +1,10 @@
 # SABOTAGE
 
-[![Build Status](https://travis-ci.org/cristaloleg/sabotage.svg)](https://travis-ci.org/cristaloleg/sabotage)
-[![GoDoc](https://godoc.org/github.com/cristaloleg/sabotage?status.svg)](https://godoc.org/github.com/cristaloleg/sabotage)
-[![Go Report](https://goreportcard.com/badge/github.com/cristaloleg/sabotage)](https://goreportcard.com/report/github.com/cristaloleg/sabotage)
+[![build-img]][build-url]
+[![pkg-img]][pkg-url]
+[![reportcard-img]][reportcard-url]
+[![coverage-img]][coverage-url]
+[![version-img]][version-url]
 
 Collection of dirty hacks in Go.
 
@@ -59,3 +61,18 @@ if sabotage.IsMutexLocked(&mu) {
     }
 }
 ```
+
+## License
+
+[MIT License](LICENSE).
+
+[build-img]: https://github.com/cristaloleg/sabotage/workflows/build/badge.svg
+[build-url]: https://github.com/cristaloleg/sabotage/actions
+[pkg-img]: https://pkg.go.dev/badge/cristaloleg/sabotage
+[pkg-url]: https://pkg.go.dev/github.com/cristaloleg/sabotage
+[reportcard-img]: https://goreportcard.com/badge/cristaloleg/sabotage
+[reportcard-url]: https://goreportcard.com/report/cristaloleg/sabotage
+[coverage-img]: https://codecov.io/gh/cristaloleg/sabotage/branch/main/graph/badge.svg
+[coverage-url]: https://codecov.io/gh/cristaloleg/sabotage
+[version-img]: https://img.shields.io/github/v/release/cristaloleg/sabotage
+[version-url]: https://github.com/cristaloleg/sabotage/releases
